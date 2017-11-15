@@ -1,0 +1,18 @@
+##
+# Aplicacion generada de caracter educativo
+#
+# @author Carlos Parra
+# @category Package
+# @copyright Carlos Parra <neural.framework@gmail.com>, Carlos Parra <zyos@sensiolabs.com>, Carlos Para <cparra@php.net>
+# @deprecated only php7
+# @license MIT, apache2
+# @version 1.1
+#/
+<IfModule mod_rewrite.c>
+    Options -MultiViews
+    RewriteEngine On
+    #RewriteBase /path/to/app
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^ index_dev.php [QSA,L]
+</IfModule>

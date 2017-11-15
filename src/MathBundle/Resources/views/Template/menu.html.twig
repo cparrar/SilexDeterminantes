@@ -1,0 +1,11 @@
+<ul class="nav nav-sidebar">
+    <li class="{{ global.request.attributes.get('_route') == 'inicio' ? 'nav-parent nav-active active' }}"><a href="{{ path('inicio') }}"><i class="icon-home"></i><span>Inicio</span></a></li>
+    <li class="{{ global.request.attributes.get('_route') in ['determinantes'] ? 'nav-parent nav-active active' : 'nav-parent' }}">
+        <a href="javascript:;"><i class="icon-puzzle"></i><span>Determinantes</span> <span class="fa arrow"></span></a>
+        <ul class="children collapse">
+            <li class="{{ global.request.attributes.get('_route') == 'determinantes' ? 'active' }}"><a href="{{ path('determinantes') }}"> Calcular</a></li>
+            <li><a href="#"> Información</a></li>
+            <li><a href="#"> Información</a></li>
+        </ul>
+    </li>
+</ul>
