@@ -19,7 +19,6 @@
          * @return mixed
          */
         public function indexAction(Application $app) {
-            return $app['twig']->render('Template/base.html.twig');
-            //return $app['twig']->render('Laura/base.html.twig');
+            return $app['twig']->render('Laura/base.html.twig');
         }
     }
