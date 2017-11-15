@@ -52,6 +52,9 @@
             return count($this->array);
         }
 
+        /**
+         * Inicializa el calculo solicitado
+         */
         private function setCalculate() {
 
             if($this->getType() == 2) {
@@ -69,9 +72,42 @@
             }
             else {
                 $this->getPivot();
+                $this->result = $this->setResult();
             }
         }
 
+        /**
+         * Genera el resultado correspondiente
+         * @return int
+         */
+        private function setResult() {
+            $result = 0;
+            foreach ($this->process AS $key => $value) {
+                $total = $value['pivot'] * $value['adj']['result'];
+                if($key == 0) {
+                    $result = $result + $total;
+                }
+                elseif($key == 1) {
+                    $result = $result - $total;
+                }
+                else {
+                    if($key % 2 == 0) {
+                        $result = $result + $total;
+                    }
+                    else {
+                        $result = $result - $total;
+                    }
+                }
+            }
+            unset($key, $value, $total);
+            return $result;
+        }
+
+        /**
+         * Genera el proceso de generar el proceso
+         * correspondiente para obtener las partes
+         * del determinante
+         */
         private function getPivot() {
 
             $column = 0;
@@ -97,7 +133,7 @@
             }
 
             unset($key, $value);
-            return ['pivot' => $this->array[$row][$column], 'array' => $list];
+            return ['pivot' => $this->array[$row][$column], 'adj' => ['array' => $list, 'result' => (new self($list))->getResult()]];
         }
 
         /**
