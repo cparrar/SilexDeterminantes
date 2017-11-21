@@ -4,14 +4,45 @@
 
     use Symfony\Component\HttpFoundation\ParameterBag;
 
+    /**
+     * Class CalculateMore
+     *
+     * @package MathBundle\Services\Calcular
+     */
     class CalculateMore implements InterfaceDeterminant {
 
+        /**
+         * @var array
+         */
         private $array;
+
+        /**
+         * @var
+         */
         private $result;
+
+        /**
+         * @var
+         */
         private $process;
+
+        /**
+         * @var
+         */
         private $rule;
+
+        /**
+         * @var mixed
+         */
         private $ruleExplanation;
 
+        /**
+         * CalculateMore constructor.
+         *
+         * Asignacion de la matriz de datos
+         *
+         * @param array $array
+         */
         function __construct($array = []) {
             $this->array = $array;
             $this->setCalculate();
@@ -120,6 +151,7 @@
 
         /**
          * Genera el resultado correspondiente
+         *
          * @return int
          */
         private function setResult() {
@@ -197,6 +229,4 @@
             unset($array, $key, $value, $column);
             return $list;
         }
-
-
     }
