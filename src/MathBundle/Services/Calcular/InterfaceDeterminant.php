@@ -1,5 +1,5 @@
 <?php
-    namespace MathBundle\Services;
+    namespace MathBundle\Services\Calcular;
 
     /**
      * Interface IntefaceDeterminant

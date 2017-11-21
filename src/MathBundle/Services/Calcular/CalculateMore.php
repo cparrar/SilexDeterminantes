@@ -1,6 +1,8 @@
 <?php
 
-    namespace MathBundle\Services;
+    namespace MathBundle\Services\Calcular;
+
+    use Symfony\Component\HttpFoundation\ParameterBag;
 
     class CalculateMore implements InterfaceDeterminant {
 
@@ -34,7 +36,7 @@
          */
         public function getRule()
         {
-            // TODO: Implement getRule() method.
+            return $this->rule;
         }
 
         /**
@@ -42,7 +44,7 @@
          */
         public function getRuleExplanation()
         {
-            // TODO: Implement getRuleExplanation() method.
+            return $this->ruleExplanation;
         }
 
         /**
@@ -73,7 +75,47 @@
             else {
                 $this->getPivot();
                 $this->result = $this->setResult();
+                $this->rule = $this->getPivotRule();
+                $this->ruleExplanation = $this->process;
             }
+        }
+
+        /**
+         * Genera la regla de los determinantes determinado
+         * para el proceso de calculos realizados
+         *
+         * @return string
+         */
+        private function getPivotRule() {
+
+            $list = [];
+            $list[] = 'det A =';
+            $result = [];
+            $result[] = 'det A =';;
+
+            foreach ($this->process AS $key => $value) {
+                if($key == 0) {
+                    $list[] = sprintf('(%s * %s)', $value['pivot'], $value['adj']['result']);
+                    $result[] = sprintf('%s', $value['pivot'] * $value['adj']['result']);
+                }
+                elseif($key == 1) {
+                    $list[] = sprintf('- (%s * %s)', $value['pivot'], $value['adj']['result']);
+                    $result[] = sprintf('- %s', $value['pivot'] * $value['adj']['result']);
+                }
+                else {
+                    if($key % 2 == 0) {
+                        $list[] = sprintf('+ (%s * %s)', $value['pivot'], $value['adj']['result']);
+                        $result[] = sprintf('+ %s', $value['pivot'] * $value['adj']['result']);
+                    }
+                    else {
+                        $list[] = sprintf('- (%s * %s)', $value['pivot'], $value['adj']['result']);
+                        $result[] = sprintf('- %s', $value['pivot'] * $value['adj']['result']);
+                    }
+                }
+            }
+            $list[] = sprintf('= %s', $this->result);
+            $result[] = sprintf('= %s', $this->result);
+            return new ParameterBag(['rule' => implode(' ', $result), 'explaned' => implode(' ', $list)]);
         }
 
         /**

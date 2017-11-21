@@ -1,6 +1,6 @@
 <?php
 
-    namespace MathBundle\Services;
+    namespace MathBundle\Services\Calcular;
 
     class CalculateThree implements InterfaceDeterminant {
 

@@ -1,6 +1,6 @@
 <?php
 
-    namespace MathBundle\Services;
+    namespace MathBundle\Services\Calcular;
 
     class ServiceDeterminant implements InterfaceDeterminant {
 
@@ -68,5 +68,13 @@
         public function getRuleExplanation()
         {
             // TODO: Implement getRuleExplanation() method.
+        }
+
+        /**
+         * @return mixed
+         */
+        public function getType()
+        {
+            // TODO: Implement getType() method.
         }
     }

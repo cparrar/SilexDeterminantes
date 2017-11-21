@@ -2,6 +2,7 @@
 
     namespace MathBundle\Controller;
 
+    use MathBundle\Services\Calcular\CalculateMore;
     use Silex\Application;
     use Symfony\Component\HttpFoundation\Request;
     use Symfony\Component\HttpFoundation\Response;
@@ -56,6 +57,10 @@
                 throw new \Exception('No es posible procesar su solicitud');
             endif;
 
-            return $app['twig']->render('Template/Determinantes/calcular.html.twig', ['det' => $request->request->get('detForm')]);
+            $data = [];
+            parse_str($request->request->get('detForm'), $data);
+            $determinante = new CalculateMore($data['detForm']);
+
+            return $app['twig']->render('Template/Determinantes/calcular.html.twig', ['det' => $determinante]);
         }
     }
